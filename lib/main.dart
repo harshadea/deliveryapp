@@ -2,6 +2,7 @@ import 'package:ecomikdeliveryapp/utils/app_routes.dart';
 import 'package:ecomikdeliveryapp/utils/constants/app_page_names.dart';
 import 'package:ecomikdeliveryapp/utils/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const LaundryDelivery());
@@ -13,7 +14,7 @@ class LaundryDelivery extends StatelessWidget {
   // This widget is the root of this app.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Laundry',
       onGenerateRoute: AppRouteGenerator.generateRoute,

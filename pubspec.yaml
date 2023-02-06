@@ -52,6 +52,8 @@ dependencies:
   sliding_up_panel: ^2.0.0+1
   shared_preferences: ^2.0.17
   provider: ^6.0.5
+  get: ^4.6.5
+
 
 
 dev_dependencies:
@@ -73,7 +75,7 @@ flutter_icons:
   android: true
   ios: true
   remove_alpha_ios: true
-  image_path: "assets/icons/logo.png"
+  image_path: "assets/delivery.png"
 
 # The following section is specific to Flutter packages.
 flutter:

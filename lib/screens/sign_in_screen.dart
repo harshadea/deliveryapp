@@ -1,9 +1,11 @@
 import 'package:ecomikdeliveryapp/utils/constants/app_constants.dart';
 import 'package:ecomikdeliveryapp/utils/constants/app_page_names.dart';
+import 'package:ecomikdeliveryapp/view/screen1/home.dart';
 import 'package:ecomikdeliveryapp/widgets/core_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:get/get.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -119,8 +121,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 CustomStretchedTextButtonWidget(
                     buttonText: 'Sign in',
                     onTap: () {
+                    Get.to(() => const HomeScreen());
                       // Goto home screen
-                      Navigator.pushNamed(context, AppPageNames.insightScreen);
+                      // Navigator.pushNamed(context, AppPageNames.insightScreen);
                     }),
                 AppGaps.hGap48,
                 Center(
