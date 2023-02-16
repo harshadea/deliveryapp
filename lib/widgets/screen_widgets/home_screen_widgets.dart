@@ -1,8 +1,10 @@
+import 'package:ecomikdeliveryapp/screens/sign_in_screen.dart';
 import 'package:ecomikdeliveryapp/utils/constants/app_constants.dart';
 import 'package:ecomikdeliveryapp/utils/constants/app_page_names.dart';
 import 'package:ecomikdeliveryapp/widgets/core_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 /// Drawer content list widgets
 class DrawerList extends StatelessWidget {
@@ -41,11 +43,10 @@ class DrawerList extends StatelessWidget {
               AppGaps.hGap20,
               Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
                 CircleAvatar(
-                  backgroundImage: Image.asset(
-                    AppAssetImages.myAccountProfilePicture,
-                  ).image,
-                  radius: 44,
-                ),
+                    backgroundImage: Image.asset(
+                      AppAssetImages.myAccountProfilePicture,
+                    ).image,
+                    radius: 44),
                 AppGaps.wGap24,
                 Expanded(
                   child: Column(
@@ -93,6 +94,13 @@ class DrawerList extends StatelessWidget {
                     Navigator.pushNamed(context, AppPageNames.insightScreen);
                   }),
               AppGaps.hGap24,
+              DrawerMenuWidget(
+                  text: 'Orders',
+                  localAssetIconName: AppAssetImages.orderSVGLogoDualTone,
+                  onTap: () {
+                    Navigator.pushNamed(context, AppPageNames.homeScreen);
+                  }),
+              AppGaps.hGap24,
               /* <---- Wallet drawer menu button ----> */
               DrawerMenuWidget(
                   text: 'My wallet',
@@ -131,7 +139,9 @@ class DrawerList extends StatelessWidget {
               DrawerMenuWidget(
                   text: 'Sign out',
                   localAssetIconName: AppAssetImages.logoutSVGLogoDualTone,
-                  onTap: () {}),
+                  onTap: () {
+                    Get.to(() => const SignInScreen());
+                  }),
               // Bottom extra spaces
               AppGaps.hGap50,
             ],

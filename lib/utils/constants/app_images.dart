@@ -101,6 +101,8 @@ class AppAssetImages {
 
   /* <-------- Dual tone icons --------> */
 
+  static const String orderSVGLogoDualTone =
+      'assets/icons/orders-svgrepo-com.svg';
   static const String locationSVGLogoDualTone =
       'assets/icons/dualtone/location.svg';
   static const String bookmarkSVGLogoDualTone =

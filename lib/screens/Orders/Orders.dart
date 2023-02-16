@@ -98,32 +98,32 @@ class order extends StatelessWidget {
                     // color: notifire.getbcolor,
                   ),
                   width: MediaQuery.of(context).size.width / 1.1,
-                  child: const TabBar(
-                    // unselectedLabelColor: notifire.getprocolor,
+                  child:  TabBar(
+                    unselectedLabelColor: notifire.getprocolor,
                     indicatorSize: TabBarIndicatorSize.tab,
                     indicator: BoxDecoration(
-                      // color: notifire.getprocolor,
-                      borderRadius: BorderRadius.all(
+                      color: notifire.getprocolor,
+                      borderRadius:const BorderRadius.all(
                         Radius.circular(20),
                       ),
                     ),
-                    tabs: [
+                    tabs:const [
                       Tab(
                         child: Align(
                           alignment: Alignment.center,
-                          // child: Text(CustomStrings.all),
+                          child: Text(CustomStrings.all),
                         ),
                       ),
                       Tab(
                         child: Align(
                           alignment: Alignment.center,
-                          // child: Text(CustomStrings.progress),
+                          child: Text(CustomStrings.progress),
                         ),
                       ),
                       Tab(
                         child: Align(
                           alignment: Alignment.center,
-                          // child: Text(CustomStrings.delivered),
+                          child: Text(CustomStrings.delivered),
                         ),
                       ),
                     ],

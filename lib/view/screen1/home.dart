@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:ecomikdeliveryapp/models/enums.dart';
 import 'package:ecomikdeliveryapp/utils/constants/app_constants.dart';
 import 'package:ecomikdeliveryapp/utils/constants/app_page_names.dart';
-import 'package:ecomikdeliveryapp/utils/notification.dart';
 import 'package:ecomikdeliveryapp/widgets/core_widgets.dart';
 import 'package:ecomikdeliveryapp/widgets/screen_widgets/home_screen_widgets.dart';
 import 'package:flutter/material.dart';
@@ -31,71 +30,10 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _homeScaffoldKey = GlobalKey<ScaffoldState>();
 
   /// Current status
-  HomeScreenStatus _currentHomeScreenStatus = HomeScreenStatus.offline;
+  final HomeScreenStatus _currentHomeScreenStatus = HomeScreenStatus.offline;
 
-  /// Get bottom bar text
-  String _getBottomButtonText() {
-    switch (_currentHomeScreenStatus) {
-      case HomeScreenStatus.offline:
-      case HomeScreenStatus.online:
-        return 'Accept delivery';
-      case HomeScreenStatus.newTask:
-        return 'Mark as picked';
-      case HomeScreenStatus.pickedTask:
-        return 'Mark as delivered';
-      default:
-        return 'Accept delivery';
-    }
-  }
 
-  /// Get gps up arrow button
-  Widget _getGPSUpArrowButton() {
-    if (_currentHomeScreenStatus == HomeScreenStatus.newTask ||
-        _currentHomeScreenStatus == HomeScreenStatus.pickedTask) {
-      return CustomIconButtonWidget(
-        onTap: () {},
-        fixedSize: const Size(34, 34),
-        backgroundColor: AppColors.primaryColor,
-        hasShadow: true,
-        isCircleShape: true,
-        child: SvgPicture.asset(AppAssetImages.gpsUpArrowSVGLogoLine,
-            color: Colors.white),
-      );
-    } else {
-      return AppGaps.emptyGap;
-    }
-  }
 
-  /// Get customer message and call buttons row
-  Widget _getCustomerMessageCallButtons() {
-    if (_currentHomeScreenStatus == HomeScreenStatus.newTask ||
-        _currentHomeScreenStatus == HomeScreenStatus.pickedTask) {
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          AppGaps.wGap5,
-          CustomIconButtonWidget(
-              fixedSize: const Size(20, 20),
-              onTap: () {
-                Navigator.pushNamed(
-                    context, AppPageNames.chatWithDeliverymanScreen);
-              },
-              child: SvgPicture.asset(AppAssetImages.messageSVGLogoLine,
-                  color: AppColors.primaryColor)),
-          AppGaps.wGap24,
-          CustomIconButtonWidget(
-              fixedSize: const Size(20, 20),
-              onTap: () {
-                Navigator.pushNamed(context, AppPageNames.callScreen);
-              },
-              child: SvgPicture.asset(AppAssetImages.callingSVGLogoLine,
-                  color: AppColors.primaryColor)),
-        ],
-      );
-    } else {
-      return AppGaps.emptyGap;
-    }
-  }
 
   /* <-------- Initial state --------> */
   @override
@@ -116,7 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     /// Get screen size
-    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       key: _homeScaffoldKey,
       /* <-------- Appbar --------> */
@@ -153,9 +90,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: IconButton(
                         icon: const Icon(Icons.notifications_none,
                             color: Colors.black),
-                        onPressed: () {
-                            Get.to( () => const Notifications(CustomStrings.notification));
-                        })),
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, AppPageNames.notificationsScreen);
+                          }
+                        )),
               ),
             ),
             AppGaps.wGap20,
@@ -165,10 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
         clipBehavior: Clip.none,
         children: [
           BackdropFilter(
-            filter: ImageFilter.blur(
-              sigmaX: 3.05,
-              sigmaY: 3.05,
-            ),
+            filter: ImageFilter.blur(sigmaX: 3.05, sigmaY: 3.05),
             child: const SizedBox.expand(),
           ),
           const Drawer(
@@ -332,7 +268,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         decoration: BoxDecoration(
                           borderRadius:
                               const BorderRadius.all(Radius.circular(15)),
-                          color: Colors.grey.shade300,
+                          color: Colors.blueGrey.shade50,
                         ),
                         width: MediaQuery.of(context).size.width / 1.1,
                         child: TabBar(
@@ -365,69 +301,101 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
+                      // const Expanded(
+                      //   flex: 1,
+                      //   child: TabBarView(
+                      //     children: <Widget>[
+                      //       All(),
+                      //       Progresse(),
+                      //       Delivered(),
+                      //     ],
+                      //   ),
+                      // ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height,
                         width: MediaQuery.of(context).size.width,
                         child: Center(
                           child: ListView.builder(
                             itemCount: 9,
-                          itemBuilder: (context, int index) {
-                           return Padding(
-                            padding: const EdgeInsets.all(12),
-                            child: Container(
-                              height: 155,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.grey.shade300),
-                              child: Padding(
-                                padding: const EdgeInsets.all(5),
-                                child:
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(height: 8),
-                                    const Text('Order #841565', style: TextStyle(
-                                        fontWeight: FontWeight.bold, fontSize: 17)),
-                                    const SizedBox(height: 5),
-                                    const Text('11 Mar 2021 at 06:00 PM',
-                                      style: TextStyle(
-                                          color: Colors.grey, fontSize: 14),),
-                                    const SizedBox(height: 12),
-                                    Row(
-                                      children: const[
-                                        Text('20 Items', style: TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.bold,),),
-                                        Spacer(flex: 3),
-                                        Expanded(child: Text('\$ 230',
-                                          style: TextStyle(fontSize: 17,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.green),)),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 12),
-                                    Container(
-                                      height: 33,
-                                      width: 100,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                          border: Border.all(color: Colors.red)
+                            itemBuilder: (context, int index) {
+                              return Padding(
+                                  padding: const EdgeInsets.all(12),
+                                  child: Container(
+                                    height: 155,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.blueGrey.shade50),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Get.to(() => const HomeScreen());
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(5),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const SizedBox(height: 8),
+                                            const Text('Order #841565',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 17)),
+                                            const SizedBox(height: 5),
+                                            const Text(
+                                              '11 Mar 2021 at 06:00 PM',
+                                              style: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 14),
+                                            ),
+                                            const SizedBox(height: 12),
+                                            Row(
+                                              children: const [
+                                                Text(
+                                                  '20 Items',
+                                                  style: TextStyle(
+                                                    fontSize: 17,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                Spacer(flex: 3),
+                                                Expanded(
+                                                    child: Text(
+                                                  '\$ 230',
+                                                  style: TextStyle(
+                                                      fontSize: 17,
+                                                      fontWeight: FontWeight.bold,
+                                                      color: Colors.green),
+                                                )),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 12),
+                                            Container(
+                                              height: 33,
+                                              width: 100,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  border: Border.all(
+                                                      color: Colors.red)),
+                                              child: const Center(
+                                                child: Text(
+                                                  'Track Order',
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.bold,
+                                                      color: Colors.red,
+                                                      fontSize: 15),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      child: const Center(child: Text('Track Order',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.red,
-                                            fontSize: 15),),),
                                     ),
-                                  ],
-                                ),
-                              ),
-                            ));
-                          },
+                                  ));
+                            },
                           ),
                         ),
                       ),
-
                     ],
                   ),
                 ),

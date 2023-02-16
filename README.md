@@ -1,3 +1,3 @@
-# Ecomik delivery app
+# Laundry delivery app
 
-Ecomik e-commerce delivery man side app.
+Laundry e-commerce delivery man side app.
